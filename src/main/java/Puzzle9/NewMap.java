@@ -92,19 +92,19 @@ public class NewMap {
 
 
     private boolean checkAbove(int currentRow, int currentCol, int currentInt) {
-        return currentInt != 9 && currentInt < map[currentRow - 1][currentCol].getValue();
+        return currentInt != 9 && currentInt <= map[currentRow - 1][currentCol].getValue();
     }
 
     private boolean checkBelow(int currentRow, int currentCol, int currentInt) {
-        return currentInt != 9 && currentInt < map[currentRow + 1][currentCol].getValue();
+        return currentInt != 9 && currentInt <= map[currentRow + 1][currentCol].getValue();
     }
 
     private boolean checkLeft(int currentRow, int currentCol, int currentInt) {
-        return currentInt != 9 && currentInt < map[currentRow][currentCol - 1].getValue();
+        return currentInt != 9 && currentInt <= map[currentRow][currentCol - 1].getValue();
     }
 
     private boolean checkRight(int currentRow, int currentCol, int currentInt) {
-        return currentInt != 9 && currentInt < map[currentRow][currentCol + 1].getValue();
+        return currentInt != 9 && currentInt <= map[currentRow][currentCol + 1].getValue();
     }
 
     public void findBasins() {
@@ -117,33 +117,44 @@ public class NewMap {
             //add erster low point zur liste
             basisPoints.add(c);
 
+            System.out.println("Low Point Coordinate, row " + c.getRow() + ", col " + c.getCol());
+
             for (int i = 0; i < basisPoints.size(); i++) {
 
                 int row = basisPoints.get(i).getRow();
                 int col = basisPoints.get(i).getCol();
-
-                System.out.println("Checking for row " + row);
-                System.out.println("Checking for col " + col);
 
                 if(map[row][col].getValue() != 9){
                     //set the current lowPoint 9, so the neighbours get lowPoints
                     map[row][col] = new SpecialInt(9);
 
                     if(checkNeighbours(stepUp(row,col))){
-                        basisPoints.add(stepUp(row,col));
-                        System.out.println("Added " + map[stepUp(row,col).getRow()][stepUp(row,col).getCol()].getValue());
+                        Coordinate temp1 = stepUp(row,col);
+                        if(!basisPoints.contains(temp1)){
+                            basisPoints.add(temp1);
+                        }
+                        System.out.println("Added " + map[stepUp(row,col).getRow()][stepUp(row,col).getCol()].getValue() + " --- on row " + stepUp(row,col).getRow() + ", col " + stepUp(row,col).getCol());
                     }
                     if(checkNeighbours(stepDown(row,col))){
-                        basisPoints.add(stepDown(row,col));
-                        System.out.println("Added " + map[stepDown(row,col).getRow()][stepDown(row,col).getCol()].getValue());
+                        Coordinate temp1 = stepDown(row,col);
+                        if(!basisPoints.contains(temp1)){
+                            basisPoints.add(temp1);
+                        }
+                        System.out.println("Added " + map[stepDown(row,col).getRow()][stepDown(row,col).getCol()].getValue() + " --- on row " + stepDown(row,col).getRow() + ", col " + stepDown(row,col).getCol());
                     }
                     if(checkNeighbours(stepLeft(row,col))){
-                        basisPoints.add(stepLeft(row,col));
-                        System.out.println("Added " + map[stepLeft(row,col).getRow()][stepLeft(row,col).getCol()].getValue());
+                        Coordinate temp1 = stepLeft(row,col);
+                        if(!basisPoints.contains(temp1)){
+                            basisPoints.add(temp1);
+                        }
+                        System.out.println("Added " + map[stepLeft(row,col).getRow()][stepLeft(row,col).getCol()].getValue() + " --- on row " + stepLeft(row,col).getRow() + ", col " + stepLeft(row,col).getCol());
                     }
                     if (checkNeighbours(stepRight(row,col))){
-                        basisPoints.add(stepRight(row,col));
-                        System.out.println("Added " + map[stepRight(row,col).getRow()][stepRight(row,col).getCol()].getValue());
+                        Coordinate temp1 = stepRight(row,col);
+                        if(!basisPoints.contains(temp1)){
+                            basisPoints.add(temp1);
+                        }
+                        System.out.println("Added " + map[stepRight(row,col).getRow()][stepRight(row,col).getCol()].getValue() + " --- on row " + stepRight(row,col).getRow() + ", col " + stepRight(row,col).getCol());
                     }
                 }
             }

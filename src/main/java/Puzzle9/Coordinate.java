@@ -1,5 +1,7 @@
 package Puzzle9;
 
+import java.util.Objects;
+
 public class Coordinate {
 
     private int row;
@@ -26,5 +28,18 @@ public class Coordinate {
 
     public int getSteppedOver() {
         return steppedOver;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Coordinate that = (Coordinate) o;
+        return row == that.row && col == that.col;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, col, steppedOver);
     }
 }
