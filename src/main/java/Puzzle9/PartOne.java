@@ -44,6 +44,6 @@ public class PartOne {
         map.findLowPoints();
         System.out.println(map.computeRiskLevel());
 
-        map.findBasins();
+       // map.findBasins();
     }
 }

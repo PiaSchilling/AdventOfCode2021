@@ -32,7 +32,7 @@ public class PartTwo {
             fileNotFoundException.printStackTrace();
         }
 
-        NewMap map = new NewMap(width,height);
+        Map map = new Map(width,height);
 
 
         try {
@@ -41,10 +41,13 @@ public class PartTwo {
             fileNotFoundException.printStackTrace();
         }
 
+        //PartOne Result
         map.findLowPoints();
         System.out.println(map.computeRiskLevel());
 
-        map.findBasins();
+
+        //PartTwo Result
+        System.out.println(map.getBasinResults());
     }
 }
 
